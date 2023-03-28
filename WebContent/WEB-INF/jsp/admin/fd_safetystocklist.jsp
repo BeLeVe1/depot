@@ -58,10 +58,10 @@
 			<table id="example" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th style="text-align: center;width: 1%">序号</th>
-						<th style="text-align: center;width: 1%">器材代码</th>
-						<th style="text-align: center;width: 1%">器材名称</th>
-						<th style="text-align: center;width: 1%">单位</th>
+						<th style="text-align: center;width: 0.2%">序号</th>
+						<th style="text-align: center;width: 1%">备件代码</th>
+						<th style="text-align: center;width: 1%">备件名称</th>
+						<th style="text-align: center;width: 0.2%">单位</th>
 						<th style="text-align: center;width: 1%">单价</th>
 						<th style="text-align: center;width: 1%">单装用数</th>
 						<th style="text-align: center;width: 1%">实时库存</th>
@@ -148,6 +148,10 @@ function selectbutton(){
  	    	  { "data": "R" },
 	    	   { "data": "maxInventory" },
 	    	   { "data": "sstime" },
+			   { "data": function(obj){
+					   return "<span><center><a onclick=\"open_layer('计算安全库存','adminquyutu','500','350')\">计算安全库存</a>&nbsp;</center></span>"
+				   }
+			   }
 	    	   ],
 	    	   "columnDefs": [      
 	    		   {

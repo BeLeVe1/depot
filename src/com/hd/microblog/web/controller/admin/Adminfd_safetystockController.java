@@ -48,6 +48,14 @@ public class Adminfd_safetystockController {
 			throws IOException {
 		return "admin/fd_safetystocklist";
 	}
+
+	//数据处理表
+	@RequestMapping("/adminquyutu")
+	public String adminquyutu(HttpServletRequest request, HttpServletResponse resp)
+			throws IOException {
+		return "admin/quyutu";
+	}
+
 	//数据处理表
 	@RequestMapping(value = "/fd_safetystocklistajax", method = { RequestMethod.POST }, produces = "application/json; charset=utf-8")
 	@ResponseBody
