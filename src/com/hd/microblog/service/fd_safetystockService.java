@@ -7,7 +7,8 @@ import com.hd.microblog.model.fd_safetystock;
 
 public interface fd_safetystockService extends IBaseService<fd_safetystock, Integer> {
 
-	List adminfindfd_safetystocklist(
+	List adminfindfd_safetystocklist(String sparepartNum, String sparepartName, String sparepartSpecification,
+									 String ss, String R, String maxInventory,String sstime,
 									 String sort,
 									 Integer start, int number);
 	
@@ -15,7 +16,8 @@ public interface fd_safetystockService extends IBaseService<fd_safetystock, Inte
 	
 	List adminfindstorerecordlist();
 	
-	List adminfindfd_safetystocklistcount();
+	List adminfindfd_safetystocklistcount(String sparepartNum, String sparepartName, String sparepartSpecification,
+										  String ss, String R, String maxInventory,String sstime);
 	
 	List adminfindstorerecordlist(String jqcode, String from_store,String to_store,
 			String qccode, String qcname, String sort,

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hd.microblog.model.fd_out;
+import com.hd.microblog.service.fd_outService;
 import net.sf.json.JSONObject;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -41,6 +43,10 @@ public class Adminfd_safetystockController {
 	@Autowired
 	@Qualifier("fd_safetystockService")
 	private fd_safetystockService fd_safetystockservice;
+
+	@Autowired
+	@Qualifier("fd_outService")
+	private fd_outService fd_outservice;
 	
 	//数据处理表
 	@RequestMapping("/adminfd_safetystocklist")
@@ -50,18 +56,58 @@ public class Adminfd_safetystockController {
 	}
 
 	//数据处理表
-	@RequestMapping("/adminquyutu")
-	public String adminquyutu(HttpServletRequest request, HttpServletResponse resp)
-			throws IOException {
-		return "admin/quyutu";
+	@RequestMapping(value = "/safetystockzhexiantuajax", produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String zhexiantuajax(HttpServletRequest request, HttpServletResponse resp,Integer dataprocess_id) throws IOException {
+		HttpSession session = request.getSession();
+		resp.setHeader("Access-Control-Allow-Origin", "*");
+		resp.setHeader("Access-Control-Allow-Methods", "GET,POST");
+		JSONObject json = new JSONObject();
+		DecimalFormat df = new DecimalFormat("#");
+		try {
+			System.out.println(dataprocess_id);
+
+			fd_out dataprocess = fd_outservice.get(dataprocess_id);
+			//真实库存
+			List reallist  = new ArrayList();
+
+			System.out.println("====1"+reallist);
+			//预测库存
+			/*List ydlist = fd_outservice.adminfindpredictionfordidandtype(dataprocess_id,1);
+			Map ydmap = (Map)ydlist.get(0);
+			List ydpjlist  = new ArrayList();
+			ydpjlist.add(Double.valueOf(String.valueOf(ydmap.get("ycz1"))));
+
+			System.out.println("====2"+ydpjlist);
+			//不包含紧急补货库存
+			List zslist = dt_predictionservice.adminfindpredictionfordidandtype(dataprocess_id,2);
+			Map zsmap = (Map)zslist.get(0);
+			List zsphlist  = new ArrayList();
+			zsphlist.add(Double.valueOf(String.valueOf(zsmap.get("ycz1"))));
+
+			System.out.println("====3"+zsphlist);
+
+			json.put("zszlist", zszlist);
+			json.put("ydpjlist", ydpjlist);
+			json.put("zsphlist", zsphlist);*/
+
+			json.put("code", "100");
+			json.put("rinfo", "查询成功");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			json.put("code", "400");
+			json.put("rinfo", "系统错误");
+		}
+		return json.toString();
 	}
 
 	//数据处理表
 	@RequestMapping(value = "/fd_safetystocklistajax", method = { RequestMethod.POST }, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	private String adminfd_safetystocklistajax(HttpServletRequest request, Model model, String page, String rows , Integer draw,
-											   String num, String sparepartNum, String sparepartName, String Unit, String unitprice,
-											   String inuse, String inventary, String ss, String R, String maxInventory,String sstime,
+											  String sparepartNum, String sparepartName, String sparepartSpecification,
+											   String ss, String R, String maxInventory,String sstime,
 											   String sort) throws IOException {
 		System.out.println("进入Adminfd_safetystockController");
 
@@ -69,8 +115,9 @@ public class Adminfd_safetystockController {
 		Integer start = Integer.valueOf(request.getParameter("start"));  
 	    String length = request.getParameter("length");  
 		int number = Integer.valueOf(length);
-		List items = fd_safetystockservice.adminfindfd_safetystocklist(sort,start,number);
-		List count = fd_safetystockservice.adminfindfd_safetystocklistcount();
+		List items = fd_safetystockservice.adminfindfd_safetystocklist(sparepartNum,sparepartName,  sparepartSpecification,ss, R,  maxInventory, sstime,
+				sort,start,number);
+		List count = fd_safetystockservice.adminfindfd_safetystocklistcount(sparepartNum,sparepartName,  sparepartSpecification,ss, R,  maxInventory, sstime);
 		int countnumber = 0;
 		if (count != null && count.size() != 0) {
 			Map map = (Map) count.get(0);

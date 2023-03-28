@@ -25,7 +25,8 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		this.fd_safetystockdao = (fd_safetystockDao) fd_safetystockdao;
 	}
 	@Override
-	public List adminfindfd_safetystocklist(
+	public List adminfindfd_safetystocklist(String sparepartNum, String sparepartName, String sparepartSpecification,
+											String ss, String R, String maxInventory,String sstime,
 											String sort,
 											Integer start, int number) {
 
@@ -34,11 +35,6 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		List<Object> paramlist = new ArrayList();
 
 		String sql = "select * from fd_safetystock where 1=1 ";
-		/*if(num !=""){
-			sql+=" and num=? ";
-			paramlist.add(num);
-			System.out.println(paramlist);
-		}
 		if(sparepartNum!=""){
 			sql+=" and sparepartNum=? ";
 			paramlist.add(sparepartNum);
@@ -47,21 +43,9 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 			sql+=" and sparepartName=? ";
 			paramlist.add(sparepartName);
 		}
-		if(Unit!=""){
-			sql+=" and Unit=? ";
-			paramlist.add(Unit);
-		}
-		if(unitprice!=""){
-			sql+=" and unitprice=? ";
-			paramlist.add(unitprice);
-		}
-		if(inuse!=""){
-			sql+=" and inuse=? ";
-			paramlist.add(inuse);
-		}
-		if(inventary!=""){
-			sql+=" and inventary=? ";
-			paramlist.add(Unit);
+		if(sparepartSpecification!=""){
+			sql+=" and sparepartSpecification=? ";
+			paramlist.add(sparepartSpecification);
 		}
 		if(ss!=""){
 			sql+=" and ss=? ";
@@ -78,7 +62,7 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		if(sstime !=""){
 			sql+=" and sstime=? ";
 			paramlist.add(sstime);
-		}*/
+		}
 		if(sort!=""){
 			sql+=" order by "+sort+" desc ";
 		}
@@ -90,14 +74,12 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 	}
 
 	@Override
-	public List adminfindfd_safetystocklistcount() {
+	public List adminfindfd_safetystocklistcount(String sparepartNum, String sparepartName, String sparepartSpecification,
+												 String ss, String R, String maxInventory,String sstime) {
 		// TODO Auto-generated method stub
 		List<Object> paramlist = new ArrayList();
 		String sql = "select count(*) count from fd_safetystock where 1=1 ";
-		/*if(num!=""){
-			sql+=" and num=? ";
-			paramlist.add(num);
-		}
+
 		if(sparepartNum!=""){
 			sql+=" and sparepartNum=? ";
 			paramlist.add(sparepartNum);
@@ -106,21 +88,9 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 			sql+=" and sparepartName=? ";
 			paramlist.add(sparepartName);
 		}
-		if(Unit!=""){
-			sql+=" and Unit=? ";
-			paramlist.add(Unit);
-		}
-		if(unitprice!=""){
-			sql+=" and unitprice=? ";
-			paramlist.add(unitprice);
-		}
-		if(inuse!=""){
-			sql+=" and inuse=? ";
-			paramlist.add(inuse);
-		}
-		if(inventary!=""){
-			sql+=" and inventary=? ";
-			paramlist.add(inventary);
+		if(sparepartSpecification!=""){
+			sql+=" and sparepartSpecification=? ";
+			paramlist.add(sparepartSpecification);
 		}
 		if(ss!=""){
 			sql+=" and ss=? ";
@@ -136,7 +106,7 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		}if(sstime !=""){
 			sql+=" and sstime=? ";
 			paramlist.add(sstime);
-		}*/
+		}
 
 		return fd_safetystockdao.exesqlrelist(sql, paramlist);
 	}

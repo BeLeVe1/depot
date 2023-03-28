@@ -43,9 +43,13 @@
 	<div id="container">
 		<div class="text-c" style="margin-top:1%;">
 			
-			<input type="text" name="qccode" id="qccode" placeholder="器材代码" style="width:100px" class="input-text">
-			<input type="text" name="qcname" id="qcname" placeholder="器材名称" style="width:100px" class="input-text">
-<!-- 			<input type="text" name="fg" id="fg" placeholder="分工" style="width:100px" class="input-text"> -->
+			<input type="text" name="sparepartNum" id="sparepartNum" placeholder="备件代码" style="width:100px"  class="input-text">
+			<input type="text" name="sparepartName" id="sparepartName" placeholder="备件名称" style="width:100px" class="input-text">
+			<input type="text" name="sparepartSpecification" id="sparepartSpecification" placeholder="备件型号" style="width:100px" class="input-text">
+			<input type="text" name="ss" id="ss" placeholder="安全库存" style="width:100px" class="input-text">
+			<input type="text" name="R" id="R" placeholder="订货点" style="width:100px" class="input-text">
+			<input type="text" name="maxInventory" id="maxInventory" placeholder="当前最大库存" style="width:100px" class="input-text">
+			<input type="text" name="sstime" id="sstime" placeholder="计算日期" style="width:100px" class="input-text">
 			<button onclick="selectbutton();" class="btn btn-success" style="background-color: #337AB7;" type="submit"></i><i class="Hui-iconfont">&#xe665;</i> 查询</button>
 		</div>
 		<div class="text-c" style="margin-top:1%;">
@@ -61,6 +65,7 @@
 						<th style="text-align: center;width: 0.2%">序号</th>
 						<th style="text-align: center;width: 1%">备件代码</th>
 						<th style="text-align: center;width: 1%">备件名称</th>
+						<th style="text-align: center;width: 1%">备件型号</th>
 						<th style="text-align: center;width: 0.2%">单位</th>
 						<th style="text-align: center;width: 1%">单价</th>
 						<th style="text-align: center;width: 1%">单装用数</th>
@@ -99,18 +104,14 @@ function returnbutton(){
 //条件查询
 function selectbutton(){
 	var sort="";
+	var sparepartNum=$("#sparepartNum").val();
+	var sparepartName=$("#sparepartName").val();
+	var sparepartSpecification=$("#sparepartSpecification").val();
+	var ss=$("#ss").val();
+	var R=$("#R").val();
+	var maxInventory=$("#maxInventory").val();
+	var sstime=$("#sstime").val();
 
-	/*var num=$("#num").val();
-	var sparepartNum=$("sparepartNum").val();
-	var sparepartName=$("sparepartName").val();
-	var Unit=$("Unit").val();
-	var unitprice=$("unitprice").val();
-	var inuse=$("inuse").val();
-	var inventary=$("inventary").val();
-	var ss=$("ss").val();
-	var R=$("R").val();
-	var maxInventory=$("maxInventory").val();
-	var sstime=$("sstime").val();*/
 	$(document).ready(function() {
 		$('#example').dataTable().fnDestroy();
 		$('#example').DataTable( {
@@ -118,7 +119,7 @@ function selectbutton(){
 			   "url": "fd_safetystocklistajax",
 	    	   "type": "post",
 	    	   "data": {
-				   //num:num,sparepartNum:sparepartNum,sparepartName:sparepartName,Unit:Unit,unitprice:unitprice,inuse:inuse,inventary:inventary,ss:ss,R:R,maxInventory:maxInventory,sstime:sstime
+				   sparepartNum:sparepartNum,sparepartName:sparepartName,sparepartSpecification:sparepartSpecification,ss:ss,R:R,maxInventory:maxInventory,sstime:sstime
 			   }
 	       },
 	       "lengthChange": true,//是否允许用户自定义显示数量
@@ -140,6 +141,7 @@ function selectbutton(){
 	    	   { "data": null,"targets": 0},
 	    	   { "data": "sparepartNum" },
 	    	   { "data": "sparepartName" },
+			   { "data": "sparepartSpecification" },
 	    	   { "data": "Unit" },
 	    	   { "data": "unitprice" },
 	    	   { "data": "inuse" },
@@ -149,7 +151,7 @@ function selectbutton(){
 	    	   { "data": "maxInventory" },
 	    	   { "data": "sstime" },
 			   { "data": function(obj){
-					   return "<span><center><a onclick=\"open_layer('计算安全库存','adminquyutu','500','350')\">计算安全库存</a>&nbsp;</center></span>"
+					   return "<span><center><a onclick=\"open_layer('查看','zhexiantu?dataprocess_id="+obj.sparepartNum+"','900','450')\">查看</a></center></span>"
 				   }
 			   }
 	    	   ],

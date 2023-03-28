@@ -52,7 +52,7 @@ var data5=[];
 $.ajax({
     cache: true,
     type: "GET",
-    url:'zhexiantuajax',
+    url:'safetystockzhexiantuajax',
     data:{dataprocess_id:${dataprocess_id}},
     async: false,
 	error: function(request) {
