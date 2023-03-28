@@ -2,7 +2,10 @@ package com.hd.microblog.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.hd.microblog.service.fd_intempService;
+import com.hd.microblog.service.fd_outtempService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,44 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		// TODO Auto-generated method stub
 		this.baseDao = fd_safetystockdao;
 		this.fd_safetystockdao = (fd_safetystockDao) fd_safetystockdao;
+	}
+	@Autowired
+	private fd_intempService fd_intempservice;
+
+	@Autowired
+	private fd_outtempService fd_outtempservice;
+	@Override
+	public List admincalcinventory(int sparepartNum) {
+		List returnlist = new ArrayList();
+		List items1  = fd_outtempservice.getBySparepartnum(sparepartNum);
+		List items2  = fd_intempservice.getBySparepartnum(sparepartNum);
+		int size=Math.min(items1.size(), items2.size());
+		returnlist.add((double)items2.get(0)-(double)items1.get(0));
+		for(int i=1;i<size;i++){
+
+			returnlist.add((double)returnlist.get(i-1)+(double)items2.get(i)-(double)items1.get(i)); //期初库存+入库-出库
+
+		}
+		if (items1.size() > size) {
+			returnlist.addAll(items1.subList(size, items1.size()));
+		} else if (items2.size() > size) {
+			returnlist.addAll(items2.subList(size, items2.size()));
+		}
+		return returnlist;
+	}
+	public List admingetss(int sparepartNum) {
+		int ss=24;//到时候数据库获取
+		List returnlist = new ArrayList();
+		List items1  = fd_outtempservice.getBySparepartnum(sparepartNum);
+		List items2  = fd_intempservice.getBySparepartnum(sparepartNum);
+		int size=Math.max(items1.size(), items2.size());
+		for(int i=0;i<size;i++){
+
+			returnlist.add(ss); //期初库存+入库-出库
+
+		}
+
+		return returnlist;
 	}
 	@Override
 	public List adminfindfd_safetystocklist(String sparepartNum, String sparepartName, String sparepartSpecification,

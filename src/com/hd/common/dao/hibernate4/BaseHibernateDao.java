@@ -168,6 +168,27 @@ public abstract class BaseHibernateDao<M extends java.io.Serializable, PK extend
 		
 	}
 	@Override
+	public List exesql2list(String sql,List<Object> paramlist) {
+		// TODO Auto-generated method stub
+		System.out.println("db's sql:");
+		System.out.println(sql);
+		System.out.println("db's paramlist:");
+		System.out.println(paramlist);
+		Query query =  getSession().createSQLQuery(sql);
+
+		if(paramlist!=null){
+			for(int i=0;i<paramlist.size();i++){
+				query.setParameter(i, paramlist.get(i));
+
+			}
+		}
+
+
+		return query.list();
+
+	}
+
+	@Override
 	public List exehqlrelist(String hql,List<Object> paramlist) {
 		// TODO Auto-generated method stub
 		Query query =  getSession().createQuery(hql);

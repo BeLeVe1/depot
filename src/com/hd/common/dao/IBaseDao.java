@@ -26,7 +26,7 @@ public interface IBaseDao<M extends java.io.Serializable, PK extends java.io.Ser
     boolean exists(PK id);
     
     public List exesqlrelist(String sql,List<Object> paramlist);
-
+    public List exesql2list(String sql,List<Object> paramlist);
     public List exehqlrelist(String hql,List<Object> paramlist);
     
     public M exesqlreM(String sql,List<Object> paramlist);

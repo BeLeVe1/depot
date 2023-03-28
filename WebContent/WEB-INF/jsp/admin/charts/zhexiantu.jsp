@@ -59,41 +59,24 @@ $.ajax({
 		alert("失败!");
 	    },
 	success: function(data) {
-		//移动平均法
-        jQuery.each(data.ydpjlist,function(i, item) {
-        	data1.push(item);
-        });
-		//指数平滑法
-		jQuery.each(data.zsphlist,function(i, item) {
-			data2.push(item);
-        });
-		//线性回归法
-		jQuery.each(data.xxhglist,function(i, item) {
-			data3.push(item);
-        });
-		//误差平方和倒数组合预测
-		jQuery.each(data.wcpflist,function(i, item) {
-			data5.push(item);
-        });
-		//真实值
-		jQuery.each(data.zszlist,function(i, item) {
-			data4.push(item);
-        });
+		data1=data.items1;
+		data2=data.items2;
+		data3=data.items3;
+		data4=data.items4;
+
+
     }
 })
 
 $(function () {
 	Highcharts.chart('container', {
         title: {
-            text: '信息统计折线图',
+            text: '库存图',
             x: -20 //center
         },
         subtitle: {
             text: '',
             x: -20
-        }, 
-        xAxis: {
-            categories: ["年份1","年份2","年份3","年份4","年份5","年份6","年份7","年份8","年份9","年份10","明年预测","后年预测"],
         },
         yAxis: {
             title: {
@@ -115,20 +98,33 @@ $(function () {
             borderWidth: 0
         },
         series: [{
-            name: '移动平均法',
+            name: '出库量',
             data: data1,
         }, {
-            name: '指数平滑法',
+            name: '入库量',
             data: data2,
         }, {
-            name: '线性回归法',
+            name: '实际库存量',
             data: data3,
         }, {
-            name: '组合预测',
-            data: data5,
-        },{
-            name: '真实值',
+			type: 'area',
+            name: '安全库存',
             data: data4,
+			color: 'rgba(255, 0, 0, 0.5)',
+			fillOpacity: 0.5,
+			marker: {
+				enabled: false,
+				symbol: 'circle',
+				radius: 2,
+				states: {
+					hover: {
+						enabled: true
+					}
+				}
+			}
+        },{
+            name: '模拟库存',
+            data: data5,
         }]
     });
 });

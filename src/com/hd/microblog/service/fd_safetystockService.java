@@ -11,9 +11,12 @@ public interface fd_safetystockService extends IBaseService<fd_safetystock, Inte
 									 String ss, String R, String maxInventory,String sstime,
 									 String sort,
 									 Integer start, int number);
+	List admincalcinventory(int sparepartNum);
 	
 	List adminfindfd_safetystocklist();
-	
+
+	List admingetss(int sparepartNum);
+
 	List adminfindstorerecordlist();
 	
 	List adminfindfd_safetystocklistcount(String sparepartNum, String sparepartName, String sparepartSpecification,

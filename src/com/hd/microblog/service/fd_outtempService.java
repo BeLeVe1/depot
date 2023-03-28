@@ -1,12 +1,12 @@
 package com.hd.microblog.service;
 
 import com.hd.common.service.IBaseService;
-import com.hd.microblog.model.fd_out;
+import com.hd.microblog.model.fd_outtemp;
 
 import java.util.List;
 
 
-public interface fd_outService extends IBaseService<fd_out, Integer> {
+public interface fd_outtempService extends IBaseService<fd_outtemp, Integer> {
 
 	List adminfinddataprocessslist();
 
@@ -19,5 +19,6 @@ public interface fd_outService extends IBaseService<fd_out, Integer> {
 
 	List adminfinddataprocesslistforqccode(String qccode);
 
+	List getBySparepartnum(int sparepartnum);
 }
 

@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hd.microblog.model.fd_out;
-import com.hd.microblog.service.fd_outService;
+import com.hd.microblog.service.fd_outtempService;
+import com.hd.microblog.service.fd_intempService;
 import net.sf.json.JSONObject;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -45,8 +45,12 @@ public class Adminfd_safetystockController {
 	private fd_safetystockService fd_safetystockservice;
 
 	@Autowired
-	@Qualifier("fd_outService")
-	private fd_outService fd_outservice;
+	@Qualifier("fd_outtempService")
+	private fd_outtempService fd_outtempService;
+
+	@Autowired
+	@Qualifier("fd_intempService")
+	private fd_intempService fd_intempservice;
 	
 	//数据处理表
 	@RequestMapping("/adminfd_safetystocklist")
@@ -58,8 +62,7 @@ public class Adminfd_safetystockController {
 	//数据处理表
 	@RequestMapping(value = "/safetystockzhexiantuajax", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String zhexiantuajax(HttpServletRequest request, HttpServletResponse resp,Integer dataprocess_id) throws IOException {
-		HttpSession session = request.getSession();
+	public String zhexiantuajax(HttpServletRequest request, HttpServletResponse resp,int dataprocess_id) throws IOException {
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET,POST");
 		JSONObject json = new JSONObject();
@@ -67,11 +70,18 @@ public class Adminfd_safetystockController {
 		try {
 			System.out.println(dataprocess_id);
 
-			fd_out dataprocess = fd_outservice.get(dataprocess_id);
+			List items1  = fd_outtempService.getBySparepartnum(dataprocess_id);
+			List items2  = fd_intempservice.getBySparepartnum(dataprocess_id);
+			List items3  = fd_safetystockservice.admincalcinventory(dataprocess_id);
+			List items4  = fd_safetystockservice.admingetss(dataprocess_id);
+			System.out.println("ss："+items4);
 			//真实库存
-			List reallist  = new ArrayList();
 
-			System.out.println("====1"+reallist);
+			json.accumulate("items1", items1);
+			json.accumulate("items2", items2);
+			json.accumulate("items3", items3);
+			json.accumulate("items4", items4);
+
 			//预测库存
 			/*List ydlist = fd_outservice.adminfindpredictionfordidandtype(dataprocess_id,1);
 			Map ydmap = (Map)ydlist.get(0);
@@ -91,13 +101,11 @@ public class Adminfd_safetystockController {
 			json.put("ydpjlist", ydpjlist);
 			json.put("zsphlist", zsphlist);*/
 
-			json.put("code", "100");
-			json.put("rinfo", "查询成功");
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			json.put("code", "400");
-			json.put("rinfo", "系统错误");
+
 		}
 		return json.toString();
 	}
