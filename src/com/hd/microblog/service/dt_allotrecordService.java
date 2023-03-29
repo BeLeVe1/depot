@@ -8,18 +8,44 @@ import com.hd.microblog.model.dt_allotrecord;
 
 public interface dt_allotrecordService extends IBaseService<dt_allotrecord, Integer> {
 
-	List adminfindsupplyplanlist(Integer allot_id,Integer supplyplan_id,Integer selfplan_id,String jqcode,String bdcode,String qccode,String qcname,Integer this_allot_number,Integer plan_supply_number,Integer sum_allot_number,
-			String from_store,String to_store,String create_people,Integer createtime,String receive_people,String total_price, String customer_name, String checker,
-			String contract, String reviser, String modification_date,
-			String preparation_time, String Audit_time,
+	List adminfindsupplyplanlist(String sparepartsNum,
+								 String sparepartsName,
+								 String sparepartsSpecification,
+								 String sparepartsType,
+								 String warehouseNum,
+								 String warehouseName,
+								 String warehouseFreight,
+								 String customerName,
+								 String ContractNum,
+								 String ContractName,
+								 String outdate,
+								 String auditor,
+								 String auditTime,
+								 String modifiedName,
+								 String modifiedDate,
+								 String modifiedTime,
+								 String preparationTime,
 			String sort,Integer start, int number) ;
 	
 	List adminfindsupplyplanlist() ;
 	
-	List adminfindsupplyplanlistcount(Integer allot_id,Integer supplyplan_id,Integer selfplan_id,String jqcode,String bdcode,String qccode,String qcname,Integer this_allot_number,Integer plan_supply_number,Integer sum_allot_number,
-			String from_store,String to_store,String create_people,Integer createtime,String receive_people,String total_price, String customer_name, String checker,
-			String contract, String reviser, String modification_date,
-			String preparation_time, String Audit_time) ;
+	List adminfindsupplyplanlistcount(String sparepartsNum,
+									  String sparepartsName,
+									  String sparepartsSpecification,
+									  String sparepartsType,
+									  String warehouseNum,
+									  String warehouseName,
+									  String warehouseFreight,
+									  String customerName,
+									  String ContractNum,
+									  String ContractName,
+									  String outdate,
+									  String auditor,
+									  String auditTime,
+									  String modifiedName,
+									  String modifiedDate,
+									  String modifiedTime,
+									  String preparationTime) ;
 	
 	List sumallotrecord(String bdcode,String qccode,String qcname);
 	

@@ -2,14 +2,13 @@ package com.hd.microblog.web.controller.admin;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hd.microblog.model.dt_admin;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hd.microblog.service.dt_sharedpartService;
 import com.hd.microblog.service.dt_allotrecordService;
+import com.hd.microblog.model.dt_allotrecord;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
-public class AdminallotrecordController {
+public class Adminfd_outController {
 	
 	@Autowired
 	@Qualifier("dt_allotrecordService")
@@ -36,33 +38,85 @@ public class AdminallotrecordController {
 	private dt_sharedpartService dt_sharedpartservice;
 	
 	//制定调拨记录表
-	@RequestMapping("/adminallotrecord")
+	@RequestMapping("/adminfd_out")
 	public String adminallotrecord(HttpServletRequest request, HttpServletResponse resp) 
 			throws IOException {
-		return "admin/allotrecord";
+		return "admin/fd_out";
 	}
 	//制定年度供应计划表
 	@RequestMapping(value = "/adminallotrecordajax", method = { RequestMethod.POST }, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	private String adminallotrecordajax(HttpServletRequest request, Model model, String page, String rows ,Integer draw, 
-			Integer allot_id,Integer supplyplan_id,Integer selfplan_id,String jqcode,String bdcode,String qccode,String qcname,Integer this_allot_number,Integer plan_supply_number,Integer sum_allot_number,
-			String from_store,String to_store,String create_people,Integer createtime,String receive_people,String total_price, String customer_name, String checker,
-			String contract, String reviser, String modification_date,
-			String preparation_time, String Audit_time,String sort) throws IOException {
+	private String adminallotrecordajax(HttpServletRequest request, Model model, String page, String rows ,Integer draw,
+										String sparepartsNum,
+										String sparepartsName,
+										String sparepartsSpecification,
+										String sparepartsType,
+										String warehouseNum,
+										String warehouseName,
+										String warehouseFreight,
+										String customerName,
+										String ContractNum,
+										String ContractName,
+										String outdate,
+										String auditor,
+										String auditTime,
+										String modifiedName,
+										String modifiedDate,
+										String modifiedTime,
+										String preparationTime,
+										String sort) throws IOException {
 		System.out.println("lueluiele:");
 		Integer start = Integer.valueOf(request.getParameter("start"));
 		System.out.println(start);
 		String length = request.getParameter("length");
 		System.out.println(length);
 		int number = Integer.valueOf(length);
-		List items = dt_allotrecordservice.adminfindsupplyplanlist(allot_id,supplyplan_id,selfplan_id,jqcode,bdcode,qccode,qcname,this_allot_number,plan_supply_number,sum_allot_number,
-				from_store,to_store,create_people,createtime,receive_people,total_price,customer_name,checker,contract,reviser,modification_date,preparation_time,Audit_time,sort,start,number);
-		List count = dt_allotrecordservice.adminfindsupplyplanlistcount(allot_id,supplyplan_id,selfplan_id, jqcode, bdcode, qccode, qcname, this_allot_number, plan_supply_number, sum_allot_number,
-				 from_store, to_store, create_people, createtime, receive_people, total_price,  customer_name,  checker,
-				 contract,  reviser,  modification_date,
-				 preparation_time,  Audit_time);
-		System.out.println("items:");
-		System.out.println(items);
+		List items = dt_allotrecordservice.adminfindsupplyplanlist(sparepartsNum,
+																	 sparepartsName,
+																	 sparepartsSpecification,
+																	 sparepartsType,
+																	 warehouseNum,
+																	 warehouseName,
+																	 warehouseFreight,
+																	 customerName,
+																	 ContractNum,
+																	 ContractName,
+																	 outdate,
+																	 auditor,
+																	 auditTime,
+																	 modifiedName,
+																	 modifiedDate,
+																	 modifiedTime,
+																	 preparationTime,
+																	sort,start,number);
+		List count = dt_allotrecordservice.adminfindsupplyplanlistcount(sparepartsNum,
+				sparepartsName,
+				sparepartsSpecification,
+				sparepartsType,
+				warehouseNum,
+				warehouseName,
+				warehouseFreight,
+				customerName,
+				ContractNum,
+				ContractName,
+				outdate,
+				auditor,
+				auditTime,
+				modifiedName,
+				modifiedDate,
+				modifiedTime,
+				preparationTime);
+		List<String> stringList = new ArrayList<>();
+		for (Object obj : items) {
+			stringList.add(obj.toString());
+		}
+
+
+
+
+
+		System.out.println("huoqushuju:");
+		System.out.println(count);
 		int countnumber = 0;
 		if (count != null && count.size() != 0) {
 			Map map = (Map) count.get(0);
@@ -70,22 +124,52 @@ public class AdminallotrecordController {
 		}
 		List returnlist  = new ArrayList();
 		
-		for(int i=0;i<items.size();i++){
+		for(int i=0;i<stringList.size();i++){
 			Map map = (Map)items.get(i);
+			/*if(map.get("modifiedTime")!=null){
+				map.put("modifiedTime",map.get("modifiedTime"));
+				new java.util.Date(rs.getDate("date").getTime)
+			}*/
+
+			//将date类型处理为string，否则2json报错 使用Java 8中的stream和instanceof运算符
 			map.put("czflag", 1);
+			map.forEach((key, value) -> {
+				if (value instanceof Date) { // 判断value是否为Date类型
+					map.put(key, ((Date) value).toString()); // 将Date类型转换为String类型
+				}
+			});
 			returnlist.add(map);
+
 		}
+
 		JSONObject jobj = new JSONObject();
 				
 		jobj.accumulate("draw", draw);
 		jobj.accumulate("recordsFiltered", countnumber);
 		jobj.accumulate("recordsTotal", countnumber);
-		jobj.accumulate("data", returnlist);
+		jobj.accumulate("data", returnlist.toArray());
 		
 		System.out.println("json为=");
 		System.out.println(jobj);
 		return jobj.toString();
 	}
+	/*@RequestMapping(value = "/adminfd_outdeleteajax", method = { RequestMethod.POST }, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	private Map adminfd_outdeleteajax(HttpServletRequest request,Integer id) throws IOException {
+		Map map = new HashMap<String, String>();
+		System.out.println(id);
+		try{
+			dt_allotrecord dt_allotrecord = dt_allotrecordservice.get(id);
+			dt_allotrecord.setStatus(2);
+				dt_allotrecordservice.saveOrUpdate(dt_allotrecord);
+				map.put("code", "100");
+
+		}catch(Exception e){
+			e.printStackTrace();
+			map.put("code", "400");
+		}
+		return map;
+	}*/
 	
 	@RequestMapping("/adminallotrecordchange")
 	public String adminapplyplanedit(HttpServletRequest request, HttpServletResponse resp,Integer allot_id,Integer sum_allot_number,String jqcode,String bdcode,String from_store,

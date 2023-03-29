@@ -28,43 +28,95 @@ public class dt_allotrecordServiceImpl extends BaseService<dt_allotrecord, Integ
 	}
 		
 	@Override
-	public List adminfindsupplyplanlist(Integer allot_id,Integer supplyplan_id,Integer selfplan_id,String jqcode,String bdcode,String qccode,String qcname,Integer this_allot_number,Integer plan_supply_number,Integer sum_allot_number,
-			String from_store,String to_store,String create_people,Integer createtime,String receive_people,String total_price, String customer_name, String checker,
-			String contract, String reviser, String modification_date,
-			String preparation_time, String Audit_time,
-			String sort, Integer start, int number) {
+	public List adminfindsupplyplanlist(String sparepartsNum,
+										String sparepartsName,
+										String sparepartsSpecification,
+										String sparepartsType,
+										String warehouseNum,
+										String warehouseName,
+										String warehouseFreight,
+										String customerName,
+										String ContractNum,
+										String ContractName,
+										String outdate,
+										String auditor,
+										String auditTime,
+										String modifiedName,
+										String modifiedDate,
+										String modifiedTime,
+										String preparationTime,
+										String sort, Integer start, int number) {
 		// TODO Auto-generated method stub
-		String sql = "select * from dt_datarecordlist where 1=1 ";
-		
-		System.out.println(from_store);
+		String sql = "select * from fd_out where 1=1 ";
 		List<Object> paramlist = new ArrayList();
 
-//		if(supplyplan_id!=""){
-//			sql+=" and supplyplan_id=? ";
-//			paramlist.add(supplyplan_id);
-//			System.out.println(paramlist);
-//		}
-//		if(selfplan_id!=""){
-//			sql+=" and selfplan_id=? ";
-//			paramlist.add(selfplan_id);
-//		}
-		if(jqcode!=""){
-			sql+=" and jqcode=? ";
-			paramlist.add(jqcode);
+		if(sparepartsNum!=""){
+			sql+=" and sparepartsNum=? ";
+			paramlist.add(sparepartsNum);
 		}
-		if(bdcode!=""){
-			sql+=" and bdcode=? ";
-			paramlist.add(bdcode);
+		if(sparepartsName!=""){
+			sql+=" and sparepartsName=? ";
+			paramlist.add(sparepartsName);
 		}
-		if(qccode!=""){
-			sql+=" and qccode=? ";
-			paramlist.add(qccode);
+		if(sparepartsSpecification!=""){
+			sql+=" and sparepartsSpecification=? ";
+			paramlist.add(sparepartsSpecification);
 		}
-		if(qcname!=""){
-			sql+=" and qcname=? ";
-			paramlist.add(qcname);
+		if(sparepartsType!=""){
+			sql+=" and sparepartsType=? ";
+			paramlist.add(sparepartsType);
+		}
+		if(warehouseNum!=""){
+			sql+=" and warehouseNum=? ";
+			paramlist.add(warehouseNum);
+		}
+		if(warehouseName!=""){
+			sql+=" and warehouseName=? ";
+			paramlist.add(warehouseName);
 		}
 
+		if(customerName!=""){
+			sql+=" and customerName=? ";
+			paramlist.add(customerName);
+		}
+		if(ContractNum!=""){
+			sql+=" and ContractNum=? ";
+			paramlist.add(ContractNum);
+		}
+//
+		if(ContractName!=""){
+			sql+=" and ContractName=? ";
+			paramlist.add(ContractName);
+		}
+		if(outdate!=""){
+			sql+=" and outdate=? ";
+			paramlist.add(outdate);
+		}
+		if(auditor!=""){
+			sql+=" and auditor=? ";
+			paramlist.add(auditor);
+		}
+		if(auditTime!=""){
+			sql+=" and auditTime=? ";
+			paramlist.add(auditTime);
+		}
+		if(modifiedName!=""){
+			sql+=" and modifiedName=? ";
+			paramlist.add(modifiedName);
+		}
+		if(modifiedDate!=""){
+			sql+=" and modifiedDate=? ";
+			paramlist.add(modifiedDate);
+		}
+
+		if(modifiedTime!=""){
+			sql+=" and modifiedTime=? ";
+			paramlist.add(modifiedTime);
+		}
+		if(preparationTime!=""){
+			sql+=" and preparationTime=? ";
+			paramlist.add(preparationTime);
+		}
 		if(sort!=""){
 			sql+=" order by "+sort+" desc ";
 		}
@@ -77,62 +129,93 @@ public class dt_allotrecordServiceImpl extends BaseService<dt_allotrecord, Integ
 	}
 
 	@Override
-	public List adminfindsupplyplanlistcount(Integer allot_id,Integer supplyplan_id,Integer selfplan_id,String jqcode,String bdcode,String qccode,String qcname,Integer this_allot_number,Integer plan_supply_number,Integer sum_allot_number,
-			String from_store,String to_store,String create_people,Integer createtime,String receive_people,String total_price, String customer_name, String checker,
-			String contract, String reviser, String modification_date,
-			String preparation_time, String Audit_time) {
+	public List adminfindsupplyplanlistcount(String sparepartsNum,
+											 String sparepartsName,
+											 String sparepartsSpecification,
+											 String sparepartsType,
+											 String warehouseNum,
+											 String warehouseName,
+											 String warehouseFreight,
+											 String customerName,
+											 String ContractNum,
+											 String ContractName,
+											 String outdate,
+											 String auditor,
+											 String auditTime,
+											 String modifiedName,
+											 String modifiedDate,
+											 String modifiedTime,
+											 String preparationTime) {
 		// TODO Auto-generated method stub
 		List<Object> paramlist = new ArrayList();
-		String sql = "select count(*) count from dt_datarecordlist where 1=1 ";
-		System.out.println("shenmegui");
-		if(jqcode!=""){
-			sql+=" and jqcode=? ";
-			paramlist.add(jqcode);
+		String sql = "select count(*) count from fd_out where 1=1 ";
+		if(sparepartsNum!=""){
+			sql+=" and sparepartsNum=? ";
+			paramlist.add(sparepartsNum);
 		}
-		if(bdcode!=""){
-			sql+=" and bdcode=? ";
-			paramlist.add(bdcode);
+		if(sparepartsName!=""){
+			sql+=" and sparepartsName=? ";
+			paramlist.add(sparepartsName);
 		}
-		if(qccode!=""){
-			sql+=" and qccode=? ";
-			paramlist.add(qccode);
+		if(sparepartsSpecification!=""){
+			sql+=" and sparepartsSpecification=? ";
+			paramlist.add(sparepartsSpecification);
 		}
-		if(qcname!=""){
-			sql+=" and qcname=? ";
-			paramlist.add(qcname);
+		if(sparepartsType!=""){
+			sql+=" and sparepartsType=? ";
+			paramlist.add(sparepartsType);
 		}
-//		if(this_allot_number!=""){
-//			sql+=" and this_allot_number=? ";
-//			paramlist.add(this_allot_number);
-//		}
-//		if(plan_supply_number!=""){
-//			sql+=" and plan_supply_number=? ";
-//			paramlist.add(plan_supply_number);
-//		}
-//		if(sum_allot_number!=""){
-//			sql+=" and sum_allot_number=? ";
-//			paramlist.add(sum_allot_number);
-//		}
-//		if(from_store!=""){
-//			sql+=" and from_store=? ";
-//			paramlist.add(from_store);
-//		}
-//		if(to_store!=""){
-//			sql+=" and to_store=? ";
-//			paramlist.add(to_store);
-//		}
-//		if(create_people!=""){
-//			sql+=" and create_people=? ";
-//			paramlist.add(create_people);
-//		}
-//		if(createtime!=""){
-//			sql+=" and createtime=? ";
-//			paramlist.add(createtime);
-//		}
-//		if(receive_people!=""){
-//			sql+=" and receive_people=? ";
-//			paramlist.add(receive_people);
-//		}
+		if(warehouseNum!=""){
+			sql+=" and warehouseNum=? ";
+			paramlist.add(warehouseNum);
+		}
+		if(warehouseName!=""){
+			sql+=" and warehouseName=? ";
+			paramlist.add(warehouseName);
+		}
+
+		if(customerName!=""){
+			sql+=" and customerName=? ";
+			paramlist.add(customerName);
+		}
+		if(ContractNum!=""){
+			sql+=" and ContractNum=? ";
+			paramlist.add(ContractNum);
+		}
+//
+		if(ContractName!=""){
+			sql+=" and ContractName=? ";
+			paramlist.add(ContractName);
+		}
+		if(outdate!=""){
+			sql+=" and outdate=? ";
+			paramlist.add(outdate);
+		}
+		if(auditor!=""){
+			sql+=" and auditor=? ";
+			paramlist.add(auditor);
+		}
+		if(auditTime!=""){
+			sql+=" and auditTime=? ";
+			paramlist.add(auditTime);
+		}
+		if(modifiedName!=""){
+			sql+=" and modifiedName=? ";
+			paramlist.add(modifiedName);
+		}
+		if(modifiedDate!=""){
+			sql+=" and modifiedDate=? ";
+			paramlist.add(modifiedDate);
+		}
+
+		if(modifiedTime!=""){
+			sql+=" and modifiedTime=? ";
+			paramlist.add(modifiedTime);
+		}
+		if(preparationTime!=""){
+			sql+=" and preparationTime=? ";
+			paramlist.add(preparationTime);
+		}
 //		sql += " limit ?, ? ";
 		System.out.println(paramlist);
 		System.out.printf("sql代码为：",sql);

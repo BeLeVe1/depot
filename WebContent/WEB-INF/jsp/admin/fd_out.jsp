@@ -42,11 +42,31 @@
 <body>
 	<div id="container">
 		<div class="text-c" style="margin-top:1%;">
-			<input type="text" name="jqcode" id="jqcode" placeholder="仓库" style="width:100px" class="input-text">
-			<input type="text" name="bdcode" id="bdcode" placeholder="库位" style="width:100px" class="input-text">
-			<input type="text" name="qccode" id="qccode" placeholder="出库日期" style="width:100px" class="input-text">
-			<input type="text" name="qcname" id="qcname" placeholder="备件类型" style="width:100px" class="input-text">
-			<!-- <input type="text" name="fg" id="fg" placeholder="分工" style="width:100px" class="input-text"> -->
+			<input type="text" name="sparepartsNum" id="sparepartsNum" placeholder="存货编号" style="width:100px" class="input-text">
+			<input type="text" name="sparepartsName" id="sparepartsName" placeholder="存货名称" style="width:100px" class="input-text">
+			<input type="text" name="sparepartsSpecification" id="sparepartsSpecification" placeholder="规格型号" style="width:100px" class="input-text">
+			<input type="text" name="sparepartsType" id="sparepartsType" placeholder="存货代码" style="width:100px" class="input-text">
+			<input type="text" name="warehouseNum" id="warehouseNum" placeholder="仓库编码" style="width:100px" class="input-text">
+			<input type="text" name="warehouseName" id="warehouseName" placeholder="仓库" style="width:100px" class="input-text">
+			<input type="text" name="warehouseFreight" id="warehouseFreight" placeholder="货位" style="width:100px" class="input-text">
+
+			<input type="text" name="customerName" id="customerName" placeholder="客户名称" style="width:100px" class="input-text">
+			<input type="text" name="ContractNum" id="ContractNum" placeholder="合同号" style="width:100px" class="input-text">
+			<input type="text" name="ContractName" id="ContractName" placeholder="合同名称" style="width:100px" class="input-text">
+			<input type="text" name="outdate" id="outdate" placeholder="出库日期" style="width:100px" class="input-text">
+			<input type="text" name="auditor" id="auditor" placeholder="审核人" style="width:100px" class="input-text">
+			<input type="text" name="auditTime" id="auditTime" placeholder="审核时间" style="width:100px" class="input-text">
+			<input type="text" name="modifiedName" id="modifiedName" placeholder="修改人" style="width:100px" class="input-text">
+			<input type="text" name="modifiedDate" id="modifiedDate" placeholder="修改日期" style="width:100px" class="input-text">
+			<input type="text" name="modifiedTime" id="modifiedTime" placeholder="修改时间" style="width:100px" class="input-text">
+			<input type="text" name="preparationTime" id="preparationTime" placeholder="制单时间" style="width:100px" class="input-text">
+
+
+
+
+
+
+				<!-- <input type="text" name="fg" id="fg" placeholder="分工" style="width:100px" class="input-text"> -->
 			<button onclick="selectbutton();" class="btn btn-success" style="background-color: #337AB7;" type="submit"></i><i class="Hui-iconfont">&#xe665;</i> 查询</button>
 		</div>
 		<div class="text-c" style="margin-top:1%;">
@@ -59,30 +79,31 @@
 			<table id="example" class="table table-striped table-bordered">
 				<thead>
 					<tr>
+
 						<th style="text-align: center;width: 1%">序号</th>
-<!-- 						<th style="text-align: center;width: 1%"><input type="checkbox" onclick="ckAll();" id="allChecks" name="" value="" style="zoom:150%;"></th>											 -->
-<!-- 						<th style="text-align: center;width: 1%">调拨单编号</th> -->
-						<th style="text-align: center;width: 1%">出库单编号</th>
-						<th style="text-align: center;width: 1%">仓库编号</th>
-						<th style="text-align: center;width: 1%">仓库</th>
-						<th style="text-align: center;width: 1%">库位</th>
-<!-- 						<th style="text-align: center;width: 1%">调出仓库编号</th> -->
-						<th style="text-align: center;width: 1%">出库日期</th>
-						<th style="text-align: center;width: 1%">备件类型</th>
-						<th style="text-align: center;width: 1%">备件名称</th>
-						<th style="text-align: center;width: 1%">备件编号</th>
+						<!--<th style="text-align: center;width: 1%">出库单编号</th>-->
+						<th style="text-align: center;width: 1%">存货编号</th>
+						<th style="text-align: center;width: 1%">存货名称</th>
 						<th style="text-align: center;width: 1%">规格型号</th>
+						<th style="text-align: center;width: 1%">存货代码</th>
+
+						<th style="text-align: center;width: 1%">仓库编码</th>
+						<th style="text-align: center;width: 1%">仓库</th>
+						<th style="text-align: center;width: 1%">货位</th>
+						<th style="text-align: center;width: 1%">主计量单位</th>
 						<th style="text-align: center;width: 1%">数量</th>
-						<th style="text-align: center;width: 1%">计量单位</th>
 						<th style="text-align: center;width: 1%">单价</th>
-						<th style="text-align: center;width: 1%">总价</th>
+						<th style="text-align: center;width: 1%">金额</th>
 						<th style="text-align: center;width: 1%">客户名称</th>
-						<th style="text-align: center;width: 1%">审核人</th>
 						<th style="text-align: center;width: 1%">合同号</th>
+						<th style="text-align: center;width: 1%">合同名称</th>
+						<th style="text-align: center;width: 1%">出库日期</th>
+						<th style="text-align: center;width: 1%">审核人</th>
+						<th style="text-align: center;width: 1%">审核时间</th>
 						<th style="text-align: center;width: 1%">修改人</th>
 						<th style="text-align: center;width: 1%">修改日期</th>
+						<th style="text-align: center;width: 1%">修改时间</th>
 						<th style="text-align: center;width: 1%">制单时间</th>
-						<th style="text-align: center;width: 1%">审核时间</th>
 						<th style="text-align: center;width: 1%">操作</th>
 					</tr>
 				</thead>
@@ -96,32 +117,48 @@ $(document).ready(selectbutton());
 
 function selectbutton(){
 	var sort="";
-	
-	var allot_id=$("#allot_id").val();
-	var supplyplan_id=$("#supplyplan_id").val();
-	var selfplan_id=$("#selfplan_id").val();
-	var jqcode=$("#jqcode").val();
-	var bdcode=$("#bdcode").val();
-	var qccode=$("#qccode").val();
-	var qcname=$("#qcname").val();
-	var this_allot_number=$("#this_allot_number").val();
-	var plan_supply_number=$("#plan_supply_number").val();
-	var sum_allot_number=$("#sum_allot_number").val();
-	var from_store=$("#from_store").val();
-	var to_store=$("#to_store").val();
-	var create_people=$("#create_people").val();
-	var createtime=$("#createtime").val();
-	var receive_people=$("#receive_people").val();
-	
+	var sparepartsNum=$("#sparepartsNum").val();
+	var sparepartsName=$("#sparepartsName").val();
+	var sparepartsSpecification=$("#sparepartsSpecification").val();
+	var sparepartsType=$("#sparepartsType").val();
+	var warehouseNum=$("#warehouseNum").val();
+	var 	warehouseName=$("#warehouseName").val();
+	var 	warehouseFreight=$("#warehouseFreight").val();
+	var 	customerName=$("#customerName").val();
+	var 	ContractNum=$("#ContractNum").val();
+	var 	ContractName=$("#ContractName").val();
+	var 	outdate=$("#outdate").val();
+	var 	auditor=$("#auditor").val();
+	var 	auditTime=$("#auditTime").val();
+	var 	modifiedName=$("#modifiedName").val();
+	var 	modifiedDate=$("#modifiedDate").val();
+	var 	modifiedTime=$("#modifiedTime").val();
+	var 	preparationTime=$("#preparationTime").val();
+
 	$(document).ready(function() {
 		 $('#example').dataTable().fnDestroy();
 	     $('#example').DataTable( {
 	        "ajax":{
 	        	  "url": "adminallotrecordajax",
 	              "type": "post",
-	              "data": {allot_id:allot_id,supplyplan_id:supplyplan_id,selfplan_id:selfplan_id,jqcode:jqcode,bdcode:bdcode,qccode:qccode,qcname:qcname,
-	            	  this_allot_number:this_allot_number,plan_supply_number:plan_supply_number,sum_allot_number:sum_allot_number,
-	            	  from_store:from_store,to_store:to_store,create_people:create_people,createtime:createtime,receive_people:receive_people}
+	              "data": {sparepartsNum:sparepartsNum,
+					  sparepartsName:sparepartsName,
+					  sparepartsSpecification:sparepartsSpecification,
+					  sparepartsType:sparepartsType,
+					  warehouseNum:warehouseNum,
+					  warehouseName:warehouseName,
+					  warehouseFreight:warehouseFreight,
+					  customerName:customerName,
+					  ContractNum:ContractNum,
+					  ContractName:ContractName,
+					  outdate:outdate,
+					  auditor:auditor,
+					  auditTime:auditTime,
+					  modifiedName:modifiedName,
+					  modifiedDate:modifiedDate,
+					  modifiedTime:modifiedTime,
+					  preparationTime:preparationTime,
+					  sort:sort}
 	            },
 	            "lengthChange": true,//是否允许用户自定义显示数量
 	            "bPaginate": true, //翻页功能
@@ -138,31 +175,33 @@ function selectbutton(){
 		        	      　　});
 		                }, 
 		        "columns": [        
-				 	{ "data": null,"targets": 0}, 
-				 	{ "data": "supplyplan_id" },
-				 	{ "data": "selfplan_id" },
-				 	{ "data": "jqcode" },
-				 	{ "data": "bdcode" },
-				 	{ "data": "qccode" },
-		            { "data": "qcname" },
-		            { "data": "this_allot_number" },
-		            { "data": "plan_supply_number" },
-		            { "data": "sum_allot_number" }, 		          
-		            { "data": "create_people" },
-		            { "data": "createtime" },
-		            { "data": "receive_people" },
+				 	{ "data": "outid"},
+				 	{ "data": "sparepartsNum" },
+				 	{ "data": "warehouseName" },
+				 	{ "data": "sparepartsSpecification" },
+				 	{ "data": "sparepartsType" },
+
+				 	{ "data": "warehouseNum" },
+		            { "data": "warehouseName" },
+		            { "data": "warehouseFreight" },
+		            { "data": "sparepartsUnit" },
+		            { "data": "quantity" },
+		            { "data": "unitPrice" },
+		            { "data": "price" },
+		            { "data": "customerName" },
 		            
-		            { "data": "total_price" },
-		            { "data": "customer_name" },
-		            { "data": "checker" },
-		            { "data": "contract" },
-		            { "data": "reviser" }, 		          
-		            { "data": "modification_date" },
-		            { "data": "preparation_time" },
-		            { "data": "Audit_time" },
+		            { "data": "ContractNum" },
+		            { "data": "ContractName" },
+		            { "data": "outdate" },
+		            { "data": "auditor" },
+		            { "data": "auditTime" },
+		            { "data": "modifiedName" },
+		            { "data": "modifiedDate" },
+		            { "data": "modifiedTime" },
+					{ "data": "preparationTime" },
 		            { "data": function(obj){
 		            	
-		            	return "<span><center><a onclick=\"open_layer('编辑','adminallotrecordedit?supplyplan_id="+obj.supplyplan_id+"&selfplan_id="+obj.selfplan_id+"&jqcode="+obj.jqcode+"&bdcode="+obj.bdcode+"&qccode="+obj.qccode+"&qcname="+obj.qcname+"&this_allot_number="+obj.this_allot_number+"&plan_supply_number="+obj.plan_supply_number+"&create_people="+obj.create_people+"&createtime="+obj.createtime+"&receive_people="+obj.receive_people+"&total_price="+obj.total_price+"&customer_name="+obj.customer_name+"&checker="+obj.checker+"&contract="+obj.contract+"&reviser="+obj.reviser+"&modification_date="+obj.modification_date+"&preparation_time="+obj.preparation_time+"','700','700')\">编辑</a>&nbsp;<a onclick=\"deleteobj("+obj.allot_id+")\">删除</a></span>"
+		            	return "<span><center><a onclick=\"open_layer('编辑','adminallotrecordedit?supplyplan_id="+obj.supplyplan_id+"&selfplan_id="+obj.selfplan_id+"&jqcode="+obj.jqcode+"&bdcode="+obj.bdcode+"&qccode="+obj.qccode+"&qcname="+obj.qcname+"&this_allot_number="+obj.this_allot_number+"&plan_supply_number="+obj.plan_supply_number+"&create_people="+obj.create_people+"&createtime="+obj.createtime+"&receive_people="+obj.receive_people+"&total_price="+obj.total_price+"&customer_name="+obj.customer_name+"&checker="+obj.checker+"&contract="+obj.contract+"&reviser="+obj.reviser+"&modification_date="+obj.modification_date+"&preparation_time="+obj.preparation_time+"','700','700')\">编辑</a>&nbsp;<a onclick=\"deleteobj("+obj.outid+")\">删除</a></span>"
 	                }
 		            }
 		        			],
@@ -203,7 +242,7 @@ function deleteobj(id){
 		  $.ajax({
 			    cache: true,
 			    type: "POST",
-			    url:'admindeleteajax',
+			    url:'adminfd_outdeleteajax',
 			    data:{id:id},
 			    async: false,
 			    error: function(request) {

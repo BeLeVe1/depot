@@ -9,25 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1741507f-7a78-4e24-bd9e-c03e7b978627" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/com/hd/microblog/dao/fd_outtempDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/hd/microblog/dao/hibernate4/fd_outtempImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/hd/microblog/model/fd_intemp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/hd/microblog/model/fd_outtemp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/fd_outtempService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/fd_outtempServiceImpl.java" afterDir="false" />
+    <list default="true" id="1741507f-7a78-4e24-bd9e-c03e7b978627" name="Changes" comment="20230328 22:45 实现图">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/admin/charts/zhexiantu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/admin/charts/zhexiantu.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/common/dao/IBaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/common/dao/IBaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/common/dao/hibernate4/BaseHibernateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/common/dao/hibernate4/BaseHibernateDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/dao/fd_outDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/dao/fd_intempDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/dao/hibernate4/fd_outImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/dao/hibernate4/fd_intempImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/model/fd_out.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/service/fd_outService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/fd_intempService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/service/fd_safetystockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/fd_safetystockService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/fd_outServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/fd_intempServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/fd_safetystockServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/fd_safetystockServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/web/controller/admin/Adminfd_safetystockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/web/controller/admin/Adminfd_safetystockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/admin/allotrecord.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/WebContent/WEB-INF/jsp/admin/fd_out.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/service/dt_allotrecordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/dt_allotrecordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/dt_allotrecordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/service/impl/dt_allotrecordServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hd/microblog/web/controller/admin/AdminallotrecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hd/microblog/web/controller/admin/Adminfd_outController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679989133698</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="20230328 22:45 实现图">
+      <created>1680014755690</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680014755690</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +220,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes" />
+    <MESSAGE value="20230328 22:45 实现图" />
+    <option name="LAST_COMMIT_MESSAGE" value="20230328 22:45 实现图" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -239,6 +234,11 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
+        <watch expression="returnlist.get(4)" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
