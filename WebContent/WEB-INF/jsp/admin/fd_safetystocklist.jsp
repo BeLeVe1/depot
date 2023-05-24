@@ -151,7 +151,7 @@ function selectbutton(){
 	    	   { "data": "maxInventory" },
 	    	   { "data": "sstime" },
 			   { "data": function(obj){
-					   return "<span><center><a onclick=\"open_layer('查看','zhexiantu?dataprocess_id="+obj.sparepartNum+"','900','450')\">查看</a></center></span>"
+					   return "<span><center><a onclick=\"open_layer('计算安全库存','zhexiantu?dataprocess_id="+obj.sparepartNum+"','900','450')\">计算安全库存</a></center></span>"
 				   }
 			   }
 	    	   ],

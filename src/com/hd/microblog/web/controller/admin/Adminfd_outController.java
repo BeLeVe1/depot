@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hd.microblog.model.dt_admin;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hd.microblog.service.dt_sharedpartService;
 import com.hd.microblog.service.dt_allotrecordService;
-import com.hd.microblog.model.dt_allotrecord;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.hd.microblog.model.fd_out;
 
 @Controller
 public class Adminfd_outController {
@@ -159,9 +155,9 @@ public class Adminfd_outController {
 		Map map = new HashMap<String, String>();
 		System.out.println(id);
 		try{
-			dt_allotrecord dt_allotrecord = dt_allotrecordservice.get(id);
-			dt_allotrecord.setStatus(2);
-				dt_allotrecordservice.saveOrUpdate(dt_allotrecord);
+			fd_out fd_out = dt_allotrecordservice.get(id);
+			fd_out.setStatus(2);
+				dt_allotrecordservice.saveOrUpdate(fd_out);
 				map.put("code", "100");
 
 		}catch(Exception e){

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+<style>
+  .popContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popContainer > div {
+  /* 如果需要内部div也垂直居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<div id="root">
+  <h1 >Hello,{{fake.progress}},{{test}}</h1>
+  <el-progress id = "circleProcess" type="circle" v-bind:percentage="parseInt(fake.progress*100)" ></el-progress>
+  <div class="popContainer" v-if="isShowProgress">
+
+  <div style="text-align: center;">
+    <el-progress :format="format"  :percentage="parseInt(fake.progress*100)"    text-color="white"   type="circle" v-if="isShowProgress">算法运行中</el-progress>
+      <el-button @click="function(){fake.end();}">停止</el-button>
+    </div>
+
+
+  </div>
+  <el-button @click="function(){isShowProgress=true}">停止</el-button>
+
+
+
+</div>
+
+
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script >
+  /**
+   * Represents a fakeProgress
+   * @constructor
+   * @param {object} options - options of the contructor
+   * @param {object} [options.timeConstant=1000] - the timeConstant in milliseconds (see https://en.wikipedia.org/wiki/Time_constant)
+   * @param {object} [options.autoStart=false] - if true then the progress auto start
+   */
+
+  const FakeProgress = function (opts) {
+    if (!opts) {
+      opts = {};
+    }
+    // 时间快慢
+    this.timeConstant = opts.timeConstant || 1000;
+    // 自动开始
+    this.autoStart = opts.autoStart || false;
+    this.parent = opts.parent;
+    this.parentStart = opts.parentStart;
+    this.parentEnd = opts.parentEnd;
+    this.progress = 0;
+    this._intervalFrequency = 100;
+    this._running = false;
+    if (this.autoStart) {
+      this.start();
+    }
+  };
+
+  /**
+   * Start fakeProgress instance
+   * @method
+   */
+
+  FakeProgress.prototype.start = function () {
+    this._time = 0;
+    this._intervalId = setInterval(
+            this._onInterval.bind(this),
+            this._intervalFrequency
+    );
+  };
+
+  FakeProgress.prototype._onInterval = function () {
+    this._time += this._intervalFrequency;
+    this.setProgress(1 - Math.exp((-1 * this._time) / this.timeConstant));
+  };
+
+  /**
+   * Stop fakeProgress instance and set progress to 1
+   * @method
+   */
+
+  FakeProgress.prototype.end = function () {
+    this.stop();
+    this.setProgress(1);
+  };
+
+  /**
+   * Stop fakeProgress instance
+   * @method
+   */
+
+  FakeProgress.prototype.stop = function () {
+    clearInterval(this._intervalId);
+    this._intervalId = null;
+  };
+
+  /**
+   * Create a sub progress bar under the first progres
+   * @method
+   * @param {object} options - options of the FakeProgress contructor
+   * @param {object} [options.end=1] - the progress in the parent that correspond of 100% of the child
+   * @param {object} [options.start=fakeprogress.progress] - the progress in the parent that correspond of 0% of the child
+   */
+
+  FakeProgress.prototype.createSubProgress = function (opts) {
+    const parentStart = opts.start || this.progress;
+    const parentEnd = opts.end || 1;
+    const options = Object.assign({}, opts, {
+      parent: this,
+      parentStart: parentStart,
+      parentEnd: parentEnd,
+      start: null,
+      end: null,
+    });
+
+    const subProgress = new FakeProgress(options);
+    return subProgress;
+  };
+
+  /**
+   * SetProgress of the fakeProgress instance and updtae the parent
+   * @method
+   * @param {number} progress - the progress
+   */
+
+  FakeProgress.prototype.setProgress = function (progress) {
+    this.progress = progress;
+    if (this.parent) {
+      this.parent.setProgress(
+              (this.parentEnd - this.parentStart) * this.progress + this.parentStart
+      );
+    }
+  };
+
+
+
+
+  const vm = new Vue({
+    el: '#root', //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+    data:  function() {
+      return {
+        fake: new FakeProgress({
+          timeConstant: 6000,
+          autoStart: true
+        }),test:5,
+              };
+    },
+  methods: {
+    format(percentage) {
+      let tex = '算法运行'
+      return  tex+ '\n' + percentage+"%"
+    }}
+
+  });
+
+
+
+</script>
+</html>

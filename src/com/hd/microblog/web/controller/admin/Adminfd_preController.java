@@ -22,10 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hd.microblog.service.dt_adminService;
 import com.hd.microblog.service.fd_preService;
 import com.hd.microblog.util.CSVToMySQL;
+import com.hd.microblog.util.MySQLToCSV;
+import com.hd.microblog.util.Mysql2Tempsheet.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import javax.servlet.ServletContext;
+
+import static com.hd.microblog.util.Mysql2Tempsheet.sql2temp;
+
 @Controller
 public class Adminfd_preController {
 	
@@ -43,6 +48,13 @@ public class Adminfd_preController {
 	public String adminfd_pre(HttpServletRequest request, HttpServletResponse resp) 
 			throws IOException {
 		return "admin/fd_pre";
+	}
+	@RequestMapping("/fd_preProcess")
+	public String adminadd(HttpServletRequest request, HttpServletResponse resp,
+						   Integer fd_preProcess)
+			throws IOException {
+		request.setAttribute("fd_preProcess", fd_preProcess);
+		return "admin/fd_preProcess";
 	}
 	
 	@RequestMapping(value = "/adminfd_preajax", method = { RequestMethod.POST }, produces = "application/json; charset=utf-8")
@@ -76,23 +88,27 @@ public class Adminfd_preController {
 	}
 	@RequestMapping(value="/adminfd_preAlgorithmtest", produces = "application/json; charset=utf-8")
 	@ResponseBody
-	private String adminfd_preAlgorithmtest(HttpServletRequest request,HttpServletResponse resp,String part_name) throws IOException {
-		System.out.println("adminfd_preAlgorithmtest");
+	private String adminfd_preAlgorithmtest(HttpServletRequest request,HttpServletResponse resp,String partName) throws IOException {
 		JSONObject json = new JSONObject();
-		//月台
+		if(partName==""){
+			System.out.println("未输入备件名");
+			System.out.println(CSVToMySQL.save());
+			json.put("code", "500");
+			json.put("info", "未输入备件名");
+			return json.toString();
+		}
+
+		System.out.println("adminfd_preAlgorithmtest");
+		MySQLToCSV mySQLToCSV = new MySQLToCSV();
+		System.out.println(partName);
+//		mySQLToCSV.sql2csv(partName);
+     	sql2temp("4010144",partName);
+
+
 		String python_url="C:\\Users\\84593\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe";
-//String python_url="C:\\Users\\Zhao Kunhai\\AppData\\Local\\Programs\\Python\\Python39\\python.exe";
 
-		
-		// TODO 自动生成的方法存根
-
-		//String testFile = servletContext.getRealPath("schedulingmethod/testconnect.py");
-		//String testFile = "D:\\schedulingmethod\\testconnect.py";
-		String testFile = "D:\\schedulingmethod\\GA-svm-master\\runthis.py ";
+		String testFile = request.getServletContext().getRealPath("/")+"GA-svm-master\\mysql.py";
 		System.out.println(testFile);
-		
-		//String[] url = new String[] { python_url, testFile};
-		//如果python的环境变量配置有问题用这个 手动配置python位置
 		String[] testurl = new String[] { "python", testFile};
 		System.out.println(Arrays.toString(testurl));
         try {

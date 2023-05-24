@@ -1,0 +1,106 @@
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <title>Insert title here</title>
+  <script src="./jquery-easyui-1.8.1/jquery.min.js" type="text/javascript"></script>
+  <script src="./jquery-easyui-1.8.1/jquery.easyui.min.js" type="text/javascript"></script>
+  <link href="./jquery-easyui-themes-ui/ui-cupertino/easyui.css" rel="stylesheet" type="text/css" />
+  <link href="./jquery-easyui-1.8.1/themes/icon.css" rel="stylesheet" type="text/css" />
+  <script src="./jquery-easyui-1.8.1/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+  <style>
+    body{padding:0;margin:0; }
+    .addtable{border:#95b8e7 1px solid; border-collapse:collapse; border-spacing:0; text-align:center; font:normal 12px "\5FAE\8F6F\96C5\9ED1";color:#444;}
+    .addtable th{height:28px; line-height:35px; background:-webkit-linear-gradient(#eff5fe,#e0ecff); background:-moz-linear-gradient(#eff5fe,#e0ecff); background:-o-linear-gradient(#eff5fe,#e0ecff); background:linear-gradient(#eff5fe,#e0ecff);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eff5fe', endColorstr='#e0ecff', GradientType=0); border-bottom:#95b8e7 1px solid; border-right:#95b8e7 1px dotted;}
+    .addtable td{width:250px; height:35px; line-height:28px; border:#95b8e7 1px dotted; padding:0px;}
+    .addtable .addtr:nth-child(odd){background:#F4F4F4;}
+    .addtable .addtr:hover{background:#e2edff;}
+    input{float:right;}
+    select{width:160px;height:25px;float:right;}
+    input::input-placeholder { text-align: center }
+  </style>
+</head>
+<body style="height: 584px; width:1335px;">
+<div id="toolbar">
+  <a  class="easyui-linkbutton" iconCls="icon-add" onclick="dmethod()"
+      plain="true">运行调度算法</a>
+</div>
+
+
+
+
+
+
+
+</div>
+
+<script type="text/javascript" >
+  function dmethod(){
+    //alert("进来了");
+    $.post('../dmethodtest', {
+    },function(data){
+      //alert(data)
+      if(data=="success"){
+
+
+        $.messager.show	({ // show error message
+          title : '调度程序已运行',
+          msg : '智能调度算法开始运行！',
+          showSpeed: 10,
+          style:{
+            right:'',
+
+            top:($(window).height() / 2 ),
+            bottom:''
+          }
+        });
+        loading(); //等待提示
+        $.post('../dmethod', {
+        },function(data){
+          //alert("data")
+          if(data=="success!"){
+            loadEnd(); //关闭等待提示
+
+            $.messager.show	({ // show error message
+              title : '调度结果',
+              msg : '智能调度算法运行成功！',
+              showSpeed: 10,
+              style:{
+                right:'',
+                top:($(window).height() / 2 ),
+                bottom:''
+              }
+            });
+            $('#dg1').datagrid('reload');
+          }else{
+            $.messager.show	({ // show error message
+              title : '调度结果',
+              msg : '智能调度算法运行失败！请联系管理员！',
+              showSpeed: 10,
+              style:{
+                right:'',
+                top:($(window).height() / 2 ),
+                bottom:''
+              }
+            });
+          }
+        })
+      }else{
+        $.messager.show	({ // show error message
+          title : '调度程序未运行',
+          msg : '智能调度算法运行失败！请联系管理员！',
+          showSpeed: 10,
+          style:{
+            right:'',
+            top:($(window).height() / 2),
+            bottom:''
+          }
+        });
+      }
+    });
+
+
+
+  }
+</script>
+</body>
+</html>

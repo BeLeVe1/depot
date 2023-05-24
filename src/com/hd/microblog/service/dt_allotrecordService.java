@@ -1,12 +1,11 @@
 package com.hd.microblog.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.hd.common.service.IBaseService;
-import com.hd.microblog.model.dt_allotrecord;
+import com.hd.microblog.model.fd_out;
 
-public interface dt_allotrecordService extends IBaseService<dt_allotrecord, Integer> {
+public interface dt_allotrecordService extends IBaseService<fd_out, Integer> {
 
 	List adminfindsupplyplanlist(String sparepartsNum,
 								 String sparepartsName,

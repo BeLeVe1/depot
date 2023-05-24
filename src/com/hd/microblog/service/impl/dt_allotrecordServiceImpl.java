@@ -2,29 +2,27 @@ package com.hd.microblog.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.hd.common.dao.IBaseDao;
 import com.hd.common.service.impl.BaseService;
-import com.hd.microblog.dao.dt_allotrecordDao;
-import com.hd.microblog.model.dt_allotrecord;
+import com.hd.microblog.dao.fd_outDao;
+import com.hd.microblog.model.fd_out;
 import com.hd.microblog.service.dt_allotrecordService;
 
 @Service("dt_allotrecordService")
-public class dt_allotrecordServiceImpl extends BaseService<dt_allotrecord, Integer> implements dt_allotrecordService{
+public class dt_allotrecordServiceImpl extends BaseService<fd_out, Integer> implements dt_allotrecordService{
 
-	private dt_allotrecordDao dt_allotrecorddao;
+	private fd_outDao dt_allotrecorddao;
 	@Autowired
-	@Qualifier("dt_allotrecordDao")
+	@Qualifier("fd_outDao")
 	@Override
-	public void setBaseDao(IBaseDao<dt_allotrecord, Integer> dt_allotrecorddao) {
+	public void setBaseDao(IBaseDao<fd_out, Integer> dt_allotrecorddao) {
 		this.baseDao = dt_allotrecorddao;
-		this.dt_allotrecorddao = (dt_allotrecordDao) dt_allotrecorddao;
+		this.dt_allotrecorddao = (fd_outDao) dt_allotrecorddao;
 	}
 		
 	@Override

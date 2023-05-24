@@ -177,7 +177,7 @@ function selectbutton(){
 		        "columns": [        
 				 	{ "data": "outid"},
 				 	{ "data": "sparepartsNum" },
-				 	{ "data": "warehouseName" },
+				 	{ "data": "sparepartsName" },
 				 	{ "data": "sparepartsSpecification" },
 				 	{ "data": "sparepartsType" },
 

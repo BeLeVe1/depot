@@ -38,6 +38,9 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		List items1  = fd_outtempservice.getBySparepartnum(sparepartNum);
 		List items2  = fd_intempservice.getBySparepartnum(sparepartNum);
 		int size=Math.min(items1.size(), items2.size());
+		if (size==0){
+			return null;
+		}
 		returnlist.add((double)items2.get(0)-(double)items1.get(0));
 		for(int i=1;i<size;i++){
 
@@ -52,7 +55,7 @@ public class fd_safetystockServiceImpl extends BaseService<fd_safetystock, Integ
 		return returnlist;
 	}
 	public List admingetss(int sparepartNum) {
-		int ss=24;//到时候数据库获取
+		int ss=0;//到时候数据库获取
 		List returnlist = new ArrayList();
 		List items1  = fd_outtempservice.getBySparepartnum(sparepartNum);
 		List items2  = fd_intempservice.getBySparepartnum(sparepartNum);
